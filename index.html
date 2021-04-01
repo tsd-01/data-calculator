@@ -76,19 +76,33 @@
 		v25_640: ["Vanish", "V25-640W", 25, 4500, 48, 48, 1200, 1200, 95, 20.5, 640, 320, 0, 4000, 16],
 		//const dm2_6= {0line:"Diamond", 1name:"DM2.6", 2pitch:2.6, 3brightness:1500, 4hpx:192, 5vpx:192, 6w:500, 7h:500, 8d:80, 9weight:5.76, 10maxpower:180, 11avgpower:90, 12scan, 13freshrate:, 14grayscale};
 
-		mvr8: ["NA", "NA", "NA", "NA", "NA"],
-		mvr10: [510000, "NA", "NA", "NA", "NA"],
-		mvr12: [425000, "NA", "NA", "NA", "NA"],
-		brompton8: [525000, 630000, 1050000, 1260000, 1312500],
-		brompton10: [420000, 504000, 840000, 1008000, 1050000],
-		brompton12: [350000, 420000, 700000, 840000, 875000],
-		colorlight8: [650000, "NA", "NA", "NA", "NA"],
-		colorlight10: [455000, "NA", "NA", "NA", "NA"],
-		colorlight12: ["NA", "NA", "NA", "NA", "NA"],
-		nova8: [650000, "NA", "NA", "NA", "NA"],
-		nova10: [320000, "NA", "NA", "NA", "NA"],
-		nova12: [320000, "NA", "NA", "NA", "NA"],
-		//port capacity, Hz in 60 50 30 25 24.
+		//mvr8: ["NA", "NA", "NA", "NA", "NA", "NA", "NA"],
+		//mvr10: [510000, "NA", "NA", "NA", "NA", 240000, 195000],
+		//mvr12: [425000, "NA", "NA", "NA", "NA", 200000, 160000],
+		//brompton8: [525000, 630000, 1050000, 1260000, 1312500, 262500, 218750],
+		//brompton10: [420000, 504000, 840000, 1008000, 1050000, 210000, 175000],
+		//brompton12: [350000, 420000, 700000, 840000, 875000, 175000, 145833],
+		//colorlight8: [650000, "NA", "NA", "NA", "NA", "NA", "NA"],
+		//colorlight10: [455000, "NA", "NA", "NA", "NA", "NA", "NA"],
+		//colorlight12: ["NA", "NA", "NA", "NA", "NA", "NA", "NA"],
+		//nova8: [650000, "NA", "NA", "NA", "NA", "NA", "NA"],
+		//nova10: [320000, "NA", "NA", "NA", "NA", "NA", "NA"],
+		//nova12: [320000, "NA", "NA", "NA", "NA", "NA", "NA"],
+		//port capacity, Hz in 60 50 30 25 24 120 144.
+
+		mvr8: ["NA", "NA", "NA", "NA", "NA", "NA", "NA"],
+		mvr10: [1275000, 1225000, 1020000, 635000, 610000, 510000, 240000, 195000, 100000],
+		mvr12: [1062500, 1020000, 850000, 531000, 510000, 425000, 200000, 160000, 90000],
+		brompton8: [1312500, 1260000, 1050000, 656250, 630000, 525000, 262500, 218750, 131250],
+		brompton10: [1050000, 1008000, 840000, 525000, 504000, 420000, 210000, 175000, 105000],
+		brompton12: [875000, 840000, 700000, 437500, 420000, 350000, 175000, 145833, 87500],
+		colorlight8: ["NA", "NA", "NA", "NA", "NA", 650000, "NA", "NA", "NA"],
+		colorlight10: ["NA", "NA", "NA", "NA", "NA", 455000, "NA", "NA", "NA"],
+		colorlight12: ["NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA"],
+		nova8: ["NA", "NA", "NA", "NA", "NA", 650000, "NA", "NA", "NA"],
+		nova10: ["NA", "NA", "NA", "NA", "NA", 320000, "NA", "NA", "NA"],
+		nova12: ["NA", "NA", "NA", "NA", "NA", 320000, "NA", "NA", "NA"],
+		//port capacity, Hz in 24 25 30 \48\ 50 60 120 144 \240\.
 	};
 
 	const processor_data = {
@@ -187,10 +201,7 @@
 		var processor_select = document.getElementById("processor_select").getElementsByTagName("option");
 		switch (brand_select) {
 			case "mvr":
-				document.getElementById("bpc_select").options[2].disabled = true;
-				for (var i = 1; i < frame_rate_select.length; i++) {
-					frame_rate_select[i].disabled = true;
-				}
+				bpc_select[3].disabled = true;
 				document.getElementById("processor_select").options[0].disabled = false;
 				document.getElementById("processor_select").options[1].disabled = false;
 				document.getElementById("processor_select").options[2].disabled = false;
@@ -210,6 +221,7 @@
 				//document.getElementById("processor_select").options[0].selected = true;
 				break;
 			case "brompton":
+				bpc_select[3].disabled = true;
 				document.getElementById("processor_select").options[0].disabled = true;
 				document.getElementById("processor_select").options[1].disabled = true;
 				document.getElementById("processor_select").options[2].disabled = true;
@@ -229,10 +241,12 @@
 				//document.getElementById("processor_select").options[2].selected = true;
 				break;
 			case "colorlight":
-				document.getElementById("bpc_select").options[0].disabled = true;
-				for (var i = 1; i < frame_rate_select.length; i++) {
+				document.getElementById("bpc_select").options[2].disabled = true;
+				document.getElementById("bpc_select").options[3].disabled = true;
+				for (var i = 0; i < frame_rate_select.length; i++) {
 					frame_rate_select[i].disabled = true;
 				}
+				frame_rate_select[5].disabled = false;
 				document.getElementById("processor_select").options[0].disabled = true;
 				document.getElementById("processor_select").options[1].disabled = true;
 				document.getElementById("processor_select").options[2].disabled = true;
@@ -254,10 +268,13 @@
 				//document.getElementById("processor_select").options[5].selected = true;
 				break;
 			case "nova":
-
-				for (var i = 1; i < frame_rate_select.length; i++) {
+				document.getElementById("bpc_select").options[1].disabled = true;
+				document.getElementById("bpc_select").options[2].disabled = true;
+				document.getElementById("bpc_select").options[3].disabled = true;
+				for (var i = 0; i < frame_rate_select.length; i++) {
 					frame_rate_select[i].disabled = true;
 				}
+				frame_rate_select[5].disabled = false;
 				document.getElementById("processor_select").options[0].disabled = true;
 				document.getElementById("processor_select").options[1].disabled = true;
 				document.getElementById("processor_select").options[2].disabled = true;
@@ -284,23 +301,29 @@
 
 	function MVR_12_60_HELIOS4K() {
 		document.getElementById("brand_select").options[0].selected = true;
-		document.getElementById("bpc_select").options[0].selected = true;
-		document.getElementById("frame_rate_select").options[0].selected = true;
+		document.getElementById("bpc_select").options[2].selected = true;
+		document.getElementById("frame_rate_select").options[5].selected = true;
 		document.getElementById("processor_select").options[0].selected = true;
+		document.getElementById('canvaswidth').value = 3840;
+		document.getElementById('canvasheight').value = 2160;
 		calculate();
 	}
 	function Brompton_12_60_SX40() {
 		document.getElementById("brand_select").options[1].selected = true;
-		document.getElementById("bpc_select").options[0].selected = true;
-		document.getElementById("frame_rate_select").options[0].selected = true;
+		document.getElementById("bpc_select").options[2].selected = true;
+		document.getElementById("frame_rate_select").options[5].selected = true;
 		document.getElementById("processor_select").options[3].selected = true;
+		document.getElementById('canvaswidth').value = 3840;
+		document.getElementById('canvasheight').value = 2160;
 		calculate();
 	}
 	function EVISION_8_60_eV4() {
 		document.getElementById("brand_select").options[2].selected = true;
-		document.getElementById("bpc_select").options[2].selected = true;
-		document.getElementById("frame_rate_select").options[0].selected = true;
+		document.getElementById("bpc_select").options[0].selected = true;
+		document.getElementById("frame_rate_select").options[5].selected = true;
 		document.getElementById("processor_select").options[6].selected = true;
+		document.getElementById('canvaswidth').value = 3840;
+		document.getElementById('canvasheight').value = 2160;
 		calculate();
 	}
 
@@ -315,6 +338,8 @@
 		var js_width = document.getElementById("width").value;
 		var js_height = document.getElementById("height").value;
 		var js_PanelPerPortCheck = document.getElementById("PanelPerPort").value;
+		var input_canvas_width = document.getElementById("canvaswidth").value;
+		var input_canvas_height = document.getElementById("canvasheight").value;
 
 
 		//temp var.
@@ -323,6 +348,17 @@
 		var screenHeightPX = js_height * data[js_fixture][5]; //屏体像素高度
 		var ScreenPixel = screenWidthPX * screenHeightPX;
 		var screenTileQTY = js_width * js_height;
+
+		if (input_canvas_width >0 && input_canvas_height >0){
+			var canvas_width = input_canvas_width;
+			var canvas_height = input_canvas_height;
+		}
+		else
+		{
+			var canvas_width = processor_data[js_processor][2];
+			var canvas_height = processor_data[js_processor][3];
+		}
+		
 
 		var PortPixelCapacityfromData = data[js_brand.concat(js_bpc)][js_frame]; //单口像素带载
 		var MaxTilePerPort = Math.floor(PortPixelCapacityfromData / (data[js_fixture][4] * data[js_fixture][5])); //单口能负载的屏体数量
@@ -338,7 +374,7 @@
 		document.getElementById('fixture_weight').value = Rround(data[js_fixture][9]);
 		document.getElementById('fixture_maxpower').value = Rround(data[js_fixture][10]) + " | " + Rround(data[js_fixture][11]);
 		//document.getElementById('fixture_avgpower').value = Rround(data[js_fixture][11]);
-		document.getElementById('fixture_scan').value = data[js_fixture][12] + " | " + data[js_fixture][13]+ " | " + data[js_fixture][14];
+		document.getElementById('fixture_scan').value = data[js_fixture][12] + " | " + data[js_fixture][13] + " | " + data[js_fixture][14];
 
 		//screen outputs
 		document.getElementById('screen_qty').value = js_width * js_height + " (" + js_width + " x " + js_height + ")";
@@ -396,10 +432,10 @@
 		var capacityCheck = Math.ceil(ScreenPixel / processor_data[js_processor][1]);
 
 		//width check 主控宽度方面计算
-		var widthCheck = Math.ceil(screenWidthPX / processor_data[js_processor][2]);
+		var widthCheck = Math.ceil(screenWidthPX / canvas_width);
 
 		//height check 主控高度方面计算
-		var heightCheck = Math.ceil(screenHeightPX / processor_data[js_processor][3]);
+		var heightCheck = Math.ceil(screenHeightPX / canvas_height);
 
 		//port check 1G输出口方面计箄1�7
 		if (js_PanelPerPortCheck <= 0) {//系统使用单口朢�大带轄1�7
@@ -452,6 +488,18 @@
 			//# of Processors Required 显示主控扢�霢�数量
 		}
 
+		//output_ProcessorCanvasSize display
+		document.getElementById('output_ProcessorCanvasSize').value = formatNumber(canvas_width) + " x " + formatNumber(canvas_height);
+		/*
+		if (canvas_width > 0 && canvas_height > 0){
+			document.getElementById('output_ProcessorCanvasSize').value = formatNumber(canvas_width) + " x " + formatNumber(canvas_height);
+		}
+		else{
+			document.getElementById('output_ProcessorCanvasSize').value = formatNumber(processor_data[js_processor][2]) + " x " + formatNumber(processor_data[js_processor][3]);
+		}
+	*/
+		
+
 		//如果输入的单口屏体数大于0且小于单口最大带载数量，则使用输入的单口屏体数��1�7
 		if (js_PanelPerPortCheck > 0 && js_PanelPerPortCheck <= MaxTilePerPort) {
 			document.getElementById('output_PanelPerPort').value = js_PanelPerPortCheck;
@@ -485,7 +533,7 @@
 </script>
 
 <body>
-	<h3 id="calc">Data Calculator for Processing Platforms v2.1 (Reference Only!)</h3>
+	<h3 id="calc">Data Calculator for Processing Platforms v2.2 (Reference Only!)</h3>
 
 	<!--<h4 id="calc_settings">Enter project settings</h4>-->
 
@@ -493,12 +541,10 @@
 		<form id="project_input">
 			<tr>
 				<td>Processing Platform</td>
-				<td>Network bit depth</td>
-				<td>Frame rate</td>
+				<td>Network Bit Depth</td>
+				<td>Frame Rate</td>
 				<td>Processor</td>
-				<td>Fixture</td>
-				<td>LED Screen QTY (Matrix)</td>
-				<td>Panels per Port</td>
+
 			</tr>
 			<td>
 
@@ -522,20 +568,24 @@
 			<td>
 
 				<select id="bpc_select" size="1" onclick="calculate()">
-					<option value="12">12 bpc</option>
-					<option value="10">10 bpc</option>
 					<option value="8">8 bpc</option>
+					<option value="10">10 bpc</option>
+					<option value="12">12 bpc</option>
 					<option value="0" selected>-Select-</option>
 				</select>
 			</td>
 			<td>
 
 				<select id="frame_rate_select" size="1" onclick="calculate()">
-					<option value="0" selected>60 Hz</option>
-					<option value="1">50 Hz</option>
+					<option value="0">24 Hz</option>
+					<option value="1">25 Hz</option>
 					<option value="2">30 Hz</option>
-					<option value="3">25 Hz</option>
-					<option value="4">24 Hz</option>
+					<option value="3">48 Hz</option>
+					<option value="4">50 Hz</option>
+					<option value="5" selected>60 Hz</option>
+					<option value="6">120 Hz</option>
+					<option value="7">144 Hz</option>
+					<option value="8">240 Hz</option>
 				</select>
 
 			</td>
@@ -556,76 +606,96 @@
 				</select>
 
 			</td>
-			<td>
+			<tr></tr>
+			<tr></tr>
+			<tr>
+				<td>Fixture</td>
+				<td>LED Screen QTY (W. x H.)</td>
+				<td>Panels per Port</td>
+				<td>Canvas Resolution (W. x H.)</td>
+			</tr>
+			<tr>
+				<td>
 
-				<select id="fixture_select" size="1" onclick="calculate()">
-					<option value="ab0_9">AB0.9</option>
-					<option value="ab1_2">AB1.2</option>
-					<option value="ab1_5">AB1.5</option>
-					<option value="ab1_8">AB1.8</option>
-					<option value="ja2_6">JA2.6</option>
-					<option value="ja3_9">JA3.9</option>
-					<option value="ja5_2">JA5.2</option>
-					<option value="sp1_5">SP1.5</option>
-					<option value="dm2_6">DM2.6</option>
-					<option value="dm3_9">DM3.9</option>
-					<option value="bm4_glass">BM4-Glass</option>
-					<option value="bm4_matte">BM4-Matte</option>
-					<option value="bm5_matte">BM5-Matte</option>
-					<option value="bm5_glass">BM5-Glass</option>
-					<option value="bo3">BO3</option>
-					<option value="bp2" selected>BP2</option>
-					<option value="bp2v2">BP2 V2</option>
-					<option value="bp3">BP3</option>
-					<option value="bp5" hidden>BP5</option>
-					<option value="rb2_3">RB2.3</option>
-					<option value="bq3_9">BQ3.9</option>
-					<option value="bq3_9_h">BQ3.9-Half</option>
-					<option value="bq4_6_b">BQ4.6-Black</option>
-					<option value="bq4_6_b_h">BQ4.6-Black-Half</option>
-					<option value="cb3">CB3</option>
-					<option value="cb3_h">CB3-Half</option>
-					<option value="cb5_w">CB5-White</option>
-					<option value="cb5_b">CB5-Black</option>
-					<option value="cb5_w_h">CB5-White-Half</option>
-					<option value="cb5_b_h">CB5-Black-Half</option>
-					<option value="cb8_t">CB8-T</option>
-					<option value="cb8_t_h">CB8-T-Half</option>
-					<option value="cb8_s">CB8-Solid</option>
-					<option value="cb8_s_h">CB8-Solid-Half</option>
-					<option value="v8">V8</option>
-					<option value="v8s">V8S</option>
-					<option value="v8t">V8T</option>
-					<option value="v18">V18</option>
-					<option value="v25_580">V25-580W</option>
-					<option value="v25_640">V25-640W</option>
-				</select>
+					<select id="fixture_select" size="1" onclick="calculate()">
+						<option value="ab0_9">AB0.9</option>
+						<option value="ab1_2">AB1.2</option>
+						<option value="ab1_5">AB1.5</option>
+						<option value="ab1_8">AB1.8</option>
+						<option value="ja2_6">JA2.6</option>
+						<option value="ja3_9">JA3.9</option>
+						<option value="ja5_2">JA5.2</option>
+						<option value="sp1_5">SP1.5</option>
+						<option value="dm2_6">DM2.6</option>
+						<option value="dm3_9">DM3.9</option>
+						<option value="bm4_glass">BM4-Glass</option>
+						<option value="bm4_matte">BM4-Matte</option>
+						<option value="bm5_matte">BM5-Matte</option>
+						<option value="bm5_glass">BM5-Glass</option>
+						<option value="bo3">BO3</option>
+						<option value="bp2" selected>BP2</option>
+						<option value="bp2v2">BP2 V2</option>
+						<option value="bp3">BP3</option>
+						<option value="bp5" hidden>BP5</option>
+						<option value="rb2_3">RB2.3</option>
+						<option value="bq3_9">BQ3.9</option>
+						<option value="bq3_9_h">BQ3.9-Half</option>
+						<option value="bq4_6_b">BQ4.6-Black</option>
+						<option value="bq4_6_b_h">BQ4.6-Black-Half</option>
+						<option value="cb3">CB3</option>
+						<option value="cb3_h">CB3-Half</option>
+						<option value="cb5_w">CB5-White</option>
+						<option value="cb5_b">CB5-Black</option>
+						<option value="cb5_w_h">CB5-White-Half</option>
+						<option value="cb5_b_h">CB5-Black-Half</option>
+						<option value="cb8_t">CB8-T</option>
+						<option value="cb8_t_h">CB8-T-Half</option>
+						<option value="cb8_s">CB8-Solid</option>
+						<option value="cb8_s_h">CB8-Solid-Half</option>
+						<option value="v8">V8</option>
+						<option value="v8s">V8S</option>
+						<option value="v8t">V8T</option>
+						<option value="v18">V18</option>
+						<option value="v25_580">V25-580W</option>
+						<option value="v25_640">V25-640W</option>
+					</select>
 
-			</td>
-			<td>
-				<label for="width">Wdith</label>
-				<input id="width" type="number" value="1" min="1" name="Width" style="width: 4em" onclick="calculate()">
-				x
-				<label for="Height">Height</label>
-				<input id="height" type="number" value="1" min="1" name="Height" style="width: 4em"
-					onclick="calculate()">
-			</td>
-			<td>
-				<input id="PanelPerPort" type="number" value="0" min="0" name="PanelPerPort" style="width: 4em"
-					onclick="calculate()">
-			</td>
+				</td>
+				<td>
+					<label for="width">W</label>
+					<input id="width" type="number" value="1" min="1" name="Width" style="width: 4em"
+						onclick="calculate()">
+					x
+					<label for="Height">H</label>
+					<input id="height" type="number" value="1" min="1" name="Height" style="width: 4em"
+						onclick="calculate()">
+				</td>
+				<td>
+					<input id="PanelPerPort" type="number" value="0" min="0" name="PanelPerPort" style="width: 4em"
+						onclick="calculate()">
+				</td>
+				<td>
+					<label for="canvaswidth">W</label>
+					<input id="canvaswidth" type="number" value="0" min="0" name="canvaswidth" style="width: 4em"
+						onclick="calculate()">
+					x
+					<label for="canvasheight">H</label>
+					<input id="canvasheight" type="number" value="0" min="0" name="canvasheight" style="width: 4em"
+						onclick="calculate()">
+				</td>
+			</tr>
 		</form>
 	</table>
 
 	<button onclick="calculate()">Calculate</button>
 	<input type="reset" value="Reset" onclick="Reset()">
 	&nbsp;&nbsp;&nbsp;
-	<button onclick="MVR_12_60_HELIOS4K()">MVR-12-60-HELIOS4K</button>
-	<button onclick="Brompton_12_60_SX40()">Brompton-12-60-SX40</button>
-	<button onclick="EVISION_8_60_eV4()">EVISION-8-60-eV4</button>
+	<button onclick="MVR_12_60_HELIOS4K()">MVR-12-60-HELIOS4K-UHD</button>
+	<button onclick="Brompton_12_60_SX40()">Brompton-12-60-SX40-UHD</button>
+	<button onclick="EVISION_8_60_eV4()">EVISION-8-60-eV4-UHD</button>
 
 
-<br><br>
+	<br><br>
 
 
 	<form id="result">
@@ -645,7 +715,8 @@
 							<td>Fixture Model & Pitch (mm):</td>
 							<td><input type="text" id="fixture_model" value="Selet a fixture" size="19" readonly />
 							</td>
-						</tr><!--
+						</tr>
+						<!--
 						<tr>
 							<td>Fixture Pitch:</td>
 							<td><input type="text" id="fixture_pitch" value="Selet a fixture" size="17" readonly />
@@ -654,7 +725,8 @@
 						<tr>
 							<td>Fixture Resolutions & Pixel Count:</td>
 							<td><input type="text" id="fixture_res" value="Selet a fixture" size="19" readonly /></td>
-						</tr><!--
+						</tr>
+						<!--
 						<tr>
 							<td>Fixture Pixels:</td>
 							<td><input type="text" id="fixture_pixel" value="Selet a fixture" size="19" readonly /></td>
@@ -677,7 +749,8 @@
 							<td>Fixture Max & Avg. Power CONS (W):</td>
 							<td><input type="text" id="fixture_maxpower" value="Selet a fixture" size="19" readonly />
 							</td>
-						</tr><!--
+						</tr>
+						<!--
 						<tr>
 							<td>Fixture Avg. Power Comsumption (W):</td>
 							<td><input type="text" id="fixture_avgpower" value="Selet a fixture" size="17" readonly />
@@ -709,7 +782,8 @@
 							<td><input type="text" id="processor_total_pixel1" value="Selet a fixture" size="19"
 									readonly />
 							</td>
-						</tr><!--
+						</tr>
+						<!--
 						<tr>
 							<td>Screen Aspect Ratio:</td>
 							<td><input type="text" id="screen_aspect" value="Selet a fixture" size="17" readonly /></td>
@@ -724,7 +798,7 @@
 							<td><input type="text" id="screen_dim" value="Selet a fixture" size="19" readonly />
 							</td>
 						</tr>
-<!--
+						<!--
 						<tr>
 							<td>Screen Diagonal (m):</td>
 							<td><input type="text" id="screen_diagonal" value="Selet a fixture" size="17" readonly />
@@ -738,7 +812,8 @@
 							<td>Screen Max & Avg. Power CONS (kW):</td>
 							<td><input type="text" id="screen_maxpower" value="Selet a fixture" size="19" readonly />
 							</td>
-						</tr><!--
+						</tr>
+						<!--
 						<tr>
 							<td>Screen Avg. Power Comsumption (kW):</td>
 							<td><input type="text" id="screen_avgpower" value="Selet a fixture" size="15" readonly />
@@ -765,8 +840,8 @@
 						</tr>
 						<tr>
 							<td>Max Canvas Width & Height of Processor:</td>
-							<td><input type="text" id="processor_width_height" value="Selet a processing platform" size="15"
-									readonly /></td>
+							<td><input type="text" id="processor_width_height" value="Selet a processing platform"
+									size="15" readonly /></td>
 						</tr>
 						<!--
 						<tr>
@@ -794,9 +869,7 @@
 				</td>
 				<td>
 					<table>
-						<tr>
-							<td>For the project:</td>
-						</tr>
+						
 						<!--
 								<tr>
 									<td>Total Effective Pixels:</td>
@@ -804,22 +877,26 @@
 											value="Selet a processing platform" size="15" readonly /></td>
 								</tr>-->
 						<tr>
+							<td>Processor Canvas Size:</td>
+							<td><input type="text" id="output_ProcessorCanvasSize" value="Selet a processing platform" size="15" readonly /></td>
+						</tr>
+						<tr>
 							<td># of Panels per Ports:</td>
 							<td><input type="text" id="output_PanelPerPort" value="Selet a processing platform"
 									size="15" readonly /></td>
 						</tr>
 						<tr>
-							<td># of Ports (1Gb Ethernet) Required:</td>
+							<td>Theoretical MIN # of 1Gb Ports:</td>
 							<td><input type="text" id="output_ports" value="Selet a processing platform" size="15"
 									readonly /></td>
 						</tr>
 
 						<tr>
-							<td># of Distros Required if any:</td>
+							<td>Theoretical MIN # of Switches:</td>
 							<td><input type="text" id="distro_qty" value="Selet a processor" size="15" readonly /></td>
 						</tr>
 						<tr>
-							<td># of Processors Required:</td>
+							<td>Theoretical MIN # of Processors:</td>
 							<td><input type="text" id="processor_qty" value="Selet a processor" size="15" readonly />
 							</td>
 						</tr>
@@ -832,10 +909,11 @@
 		</table>
 
 	</form>
-	<p>Panel details from <i>[ROE Visual] Product Specifications - 16 Dec, 2020</i>. Product Specifications file internal ONLY.<br>
+	<p><b>When WALL size bigger than UHD (4K), # of Switches could be wrong. Further calculation/confirmation needed.</b><br>Panel details from <i>[ROE Visual] Product Specifications - 16 Dec, 2020</i>. Product Specifications file
+		internal ONLY.<br>
 		Details correspond with data from <a href="https://www.roevisual.com/">ROE website</a>.
 	</p>
-	
+
 
 	<div class="padding">&nbsp;</div>
 </body>
@@ -849,4 +927,5 @@
 	1.2, 2020-05-20, rony, hide BP5, from new SPEC.
 	2.0, 2020-01-11, rony, update scan/refresh rate/grayscale. delete unreleased panel types. see backup file for undeleted version.
 	2.1, 2021-01-20, rony, seperate HELIOS 4K/8K on calculation. add bp2v2. delete bo2. delete bm4_mirror.
+	2.2, 2021-04-01, rony, add canvas resolution input. add 120, 144 frame rate
 -->
