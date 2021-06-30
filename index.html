@@ -90,7 +90,7 @@
 		//nova12: [320000, "NA", "NA", "NA", "NA", "NA", "NA"],
 		//port capacity, Hz in 60 50 30 25 24 120 144.
 
-		mvr8: ["NA", "NA", "NA", "NA", "NA", "NA", "NA"],
+		mvr8: ["NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA"],
 		mvr10: [1275000, 1225000, 1020000, 635000, 610000, 510000, 240000, 195000, 100000],
 		mvr12: [1062500, 1020000, 850000, 531000, 510000, 425000, 200000, 160000, 90000],
 		brompton8: [1312500, 1260000, 1050000, 656250, 630000, 525000, 262500, 218750, 131250],
@@ -202,6 +202,7 @@
 		switch (brand_select) {
 			case "mvr":
 				bpc_select[3].disabled = true;
+				bpc_select[0].disabled = true;
 				document.getElementById("processor_select").options[0].disabled = false;
 				document.getElementById("processor_select").options[1].disabled = false;
 				document.getElementById("processor_select").options[2].disabled = false;
@@ -221,6 +222,7 @@
 				//document.getElementById("processor_select").options[0].selected = true;
 				break;
 			case "brompton":
+				bpc_select[3].disabled = true;
 				bpc_select[3].disabled = true;
 				document.getElementById("processor_select").options[0].disabled = true;
 				document.getElementById("processor_select").options[1].disabled = true;
